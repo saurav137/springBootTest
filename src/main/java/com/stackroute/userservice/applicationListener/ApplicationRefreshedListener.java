@@ -1,6 +1,7 @@
 package com.stackroute.userservice.applicationListener;
 
 import com.stackroute.userservice.CustomException.UserAlreadyExist;
+import com.stackroute.userservice.CustomException.UserNotFound;
 import com.stackroute.userservice.domain.User;
 import com.stackroute.userservice.service.UserService;
 import org.springframework.context.ApplicationListener;
@@ -21,13 +22,13 @@ public class ApplicationRefreshedListener implements ApplicationListener<Context
         try {
             User user = new User(12, "rohit", "sharma");
             userService.saveUser(user);
-        }catch (UserAlreadyExist ex){
+        }catch (UserAlreadyExist | UserNotFound ex){
             System.out.println(ex.getMessage());
         }
         try {
             User user2=new User(22,"virat","kohli");
             userService.saveUser(user2);
-        }catch (UserAlreadyExist ex){
+        }catch (UserAlreadyExist | UserNotFound ex){
             System.out.println(ex.getMessage());
         }
 

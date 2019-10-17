@@ -31,11 +31,16 @@ public class UserController {
     @PostMapping("user")
      public ResponseEntity<?>  saveUser(@RequestBody User user) throws UserAlreadyExist {
          ResponseEntity responseEntity;
+try {
+    userService.saveUser(user);
+    responseEntity = new ResponseEntity("Succesfully Created", HttpStatus.CREATED);
+    return responseEntity;
+}catch (Exception ex){
+    return new ResponseEntity<String>(ex.getMessage(),HttpStatus.ALREADY_REPORTED);
+}
 
-             userService.saveUser(user);
-             responseEntity = new ResponseEntity("Succesfully Created", HttpStatus.CREATED);
 
-         return responseEntity;
+
      }
      @GetMapping("user")
     public ResponseEntity<?> getAllUser(){
@@ -88,7 +93,7 @@ public class UserController {
     ResponseEntity responseEntity;
         try {
             userService.getTrackByName(trackByName);
-            responseEntity = new ResponseEntity<User>(userService.getTrackByName(trackByName), HttpStatus.CREATED);
+            responseEntity = new ResponseEntity<List<User>>(userService.getTrackByName(trackByName), HttpStatus.CREATED);
         }
         catch (Exception ex) {
             responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);

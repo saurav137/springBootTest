@@ -3,7 +3,8 @@ package com.stackroute.userservice.service;
 import com.stackroute.userservice.CustomException.UserAlreadyExist;
 import com.stackroute.userservice.CustomException.UserNotFound;
 import com.stackroute.userservice.domain.User;
-import com.stackroute.userservice.repository.UserRepository;
+import com.stackroute.userservice.repository.MongoRepositoryclass;
+//import com.stackroute.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
@@ -15,9 +16,9 @@ import java.util.List;
 public class DummyService implements UserService {
 
 
-    public UserRepository userRepository;
+    public MongoRepositoryclass userRepository;
     @Autowired
-    public DummyService(UserRepository userRepository){
+    public DummyService(MongoRepositoryclass userRepository){
         System.out.println("this one used dev profile");
         this.userRepository=userRepository;
     }
@@ -72,8 +73,7 @@ public class DummyService implements UserService {
     }
 
     @Override
-    public  User getTrackByName(String trackByName){
-        User user=userRepository.getTrackByName(trackByName);
-        return user;
+    public List<User> getTrackByName(String trackByName) {
+        return null;
     }
 }
