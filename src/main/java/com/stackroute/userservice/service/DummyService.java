@@ -6,17 +6,19 @@ import com.stackroute.userservice.domain.User;
 import com.stackroute.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-@Primary
+@Profile("dev")
 public class DummyService implements UserService {
 
 
     public UserRepository userRepository;
     @Autowired
     public DummyService(UserRepository userRepository){
+        System.out.println("this one used dev profile");
         this.userRepository=userRepository;
     }
     @Override

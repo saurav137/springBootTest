@@ -22,7 +22,7 @@ public class UserController {
     public UserService userService;
     public UserController(UserService userService){
          this.userService=userService;
-        ;
+
      }
 
 
