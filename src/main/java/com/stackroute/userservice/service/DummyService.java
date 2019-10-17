@@ -4,28 +4,29 @@ import com.stackroute.userservice.CustomException.UserAlreadyExist;
 import com.stackroute.userservice.CustomException.UserNotFound;
 import com.stackroute.userservice.domain.User;
 import com.stackroute.userservice.repository.UserRepository;
-import org.apache.jasper.tagplugins.jstl.core.Catch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class UserServiceImpl implements UserService{
+@Primary
+public class DummyService implements UserService {
 
 
-   public  UserRepository userRepository;
-   @Autowired
-   public UserServiceImpl(UserRepository userRepository){
-       this.userRepository=userRepository;
-   }
+    public UserRepository userRepository;
+    @Autowired
+    public DummyService(UserRepository userRepository){
+        this.userRepository=userRepository;
+    }
     @Override
     public User saveUser(User user)throws UserAlreadyExist {
-       try{
-           getTrackById(user.getTrackId());
-           throw new UserAlreadyExist("User Already Exist exception");
-       } catch(UserNotFound ex){
-           User savedUser=userRepository.save(user);
-           return savedUser;
+        try{
+            getTrackById(user.getTrackId());
+            throw new UserAlreadyExist("User Already Exist exception");
+        } catch(UserNotFound ex){
+            User savedUser=userRepository.save(user);
+            return savedUser;
         }
 
     }
@@ -37,10 +38,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getTrackById(int id) throws UserNotFound {
-       try {
-           User user = userRepository.findById(id).get();
-           return user;
-       }
+        try {
+            User user = userRepository.findById(id).get();
+            return user;
+        }
         catch(Exception ex){
             throw new UserNotFound("User Not Found Exception");
 
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService{
 
         }
 
-   }
+    }
 
     @Override
     public User updateTrack(int id, String comment) {
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public  User getTrackByName(String trackByName){
-       User user=userRepository.getTrackByName(trackByName);
-       return user;
+        User user=userRepository.getTrackByName(trackByName);
+        return user;
     }
 }
