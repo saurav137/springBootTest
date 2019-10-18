@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class adviceController {
-    public class TrackAdvice {
 
         @ResponseBody
         @ExceptionHandler(UserAlreadyExist.class)
@@ -25,5 +24,5 @@ public class adviceController {
         public String NotFoundAdvice(UserAlreadyExist ex) {
             return ex.getMessage();
         }
-    }
+
 }
